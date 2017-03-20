@@ -1,4 +1,4 @@
-package moah.core.service.impl;
+package noah.core.service.impl;
 
 import java.util.Date;
 import java.util.List;
@@ -12,9 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.common.collect.Lists;
 
 import lombok.extern.slf4j.Slf4j;
-import moah.core.dao.UserDao;
-import moah.core.model.User;
-import moah.core.service.UserService;
+import noah.core.dao.UserDao;
+import noah.core.model.User;
+import noah.core.service.UserService;
 
 @Slf4j
 @Service

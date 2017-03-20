@@ -1,4 +1,4 @@
-package moah.core.model;
+package noah.core.model;
 
 import java.io.Serializable;
 import java.util.Collection;
