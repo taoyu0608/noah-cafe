@@ -1,8 +1,8 @@
-package moah.core.service;
+package noah.core.service;
 
 import java.util.List;
 
-import moah.core.model.User;
+import noah.core.model.User;
 
 public interface UserService {
 
