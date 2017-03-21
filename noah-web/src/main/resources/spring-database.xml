@@ -53,9 +53,9 @@
     </bean>
 
     <util:list id="entityPackages">
-        <value>moah.core.model</value>
+        <value>noah.core.model</value>
     </util:list>
 
-    <jpa:repositories base-package="moah.core.dao" />
+    <jpa:repositories base-package="noah.core.dao" />
 
 </beans>
