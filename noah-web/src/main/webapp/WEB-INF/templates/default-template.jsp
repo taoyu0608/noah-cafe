@@ -11,15 +11,33 @@
 	<meta http-equiv="pragma" content="no-cache" />
 	<meta http-equiv="cache-control" content="no-cache" />
 	
+	<link rel="stylesheet" href="${contextPath}/css/noah/main.css"  />
+	<link rel="stylesheet" href="${contextPath}/css/bootstrap/css/bootstrap.min.css"  />
+	<link rel="stylesheet" href="${contextPath}/font/font-awesome/css/font-awesome.min.css" />
+	
+	<script src="${contextPath}/js/angular/angular.min.js"></script>
+	<script>
+	var noahApp = angular.module("noahApp", []);
+	</script>
+	
 	<sitemesh:write property="head" />
 </head>
-<body>
-    <div style="margin: 10px;">
-        <sitemesh:write property='body' />
-    </div>
+<body ng-app="noahApp">
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+		<a class="navbar-brand" href="#">NOAH</a>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active"><a class="nav-link" href="#">產品介紹</a></li>
+			</ul>
+		</div>
+	</nav>
 
-    <div class="footer">
-        <div>NOAH 咖啡</div>
-    </div>
+	<div style="margin: 5px;">
+		<sitemesh:write property='body' />
+	</div>
+
+    <footer class="footer">
+      <div style="text-align: center;"><span>NOAH手作咖啡烘焙</span></div>
+    </footer>
 </body>
 </html>
