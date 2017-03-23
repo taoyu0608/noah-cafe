@@ -15,6 +15,11 @@ public class ProductView {
 	private String name;
 	
 	/**
+	 * 商品顯示的名稱
+	 * */
+	private String displayName;
+	
+	/**
 	 * 商品價格
 	 * */
 	private BigDecimal price; 

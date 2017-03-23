@@ -16,7 +16,9 @@ public class ProductViewConverter {
 	public ProductView convert(Product source) {
 		
 		ProductView target = new ProductView();
-		target.setName("[ " + source.getName() + " ]");
+		target.setId(source.getId());
+		target.setName(source.getName());
+		target.setDisplayName("[ " + source.getName() + " ]");
 		target.setPrice(source.getPrice());
 		
 		return target;
