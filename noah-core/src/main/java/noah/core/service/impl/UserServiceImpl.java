@@ -71,7 +71,8 @@ public class UserServiceImpl implements UserService {
 		}
 
 		User user = this.getUserByUsername(username);
-		return String.format("%s ( %s )", user.getName(), user.getLocalName());
+//		return String.format("%s ( %s )", user.getName(), user.getLocalName());
+		return "";
 	}
 
 	@Override
@@ -99,19 +100,19 @@ public class UserServiceImpl implements UserService {
 		List<String> passwords = Lists.newArrayList();
 		passwords.add(encryptPassword);
 
-		if (user.getOldPasswords() != null) {
-			oldPasswords = user.getOldPasswords().split(",", -1);
-			int length = oldPasswords.length;
-			for (int i = 0; i < 23; i++) {
-				if (i == length) {
-					break;
-				}
-				passwords.add(oldPasswords[i]);
-			}
-		}
+//		if (user.getOldPasswords() != null) {
+//			oldPasswords = user.getOldPasswords().split(",", -1);
+//			int length = oldPasswords.length;
+//			for (int i = 0; i < 23; i++) {
+//				if (i == length) {
+//					break;
+//				}
+//				passwords.add(oldPasswords[i]);
+//			}
+//		}
 
-		String joinedPassword = String.join(",", passwords);
-		user.setOldPasswords(joinedPassword);
+//		String joinedPassword = String.join(",", passwords);
+//		user.setOldPasswords("");
 		user.setPassword(encryptPassword);
 //		user.setUpdatedDate(new Date());
 
