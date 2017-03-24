@@ -1,0 +1,53 @@
+package noah.core.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.extern.slf4j.Slf4j;
+
+import noah.core.dao.ProductDao;
+import noah.core.model.Product;
+
+@Slf4j
+@Service
+@Transactional
+public class ProductServiceImpl implements noah.core.service.ProductService {
+
+	@Autowired
+	private ProductDao productDao;
+	
+	@Override
+	public Product saveProduct(Product product) {
+		return productDao.save(product);
+	}
+
+	@Override
+	public Product getProductById(String productId) {
+		return productDao.findByProductId(productId);
+	}
+
+	@Override
+	public List<Product> getAllProducts() {
+		return productDao.findAll();
+	}
+
+	@Override
+	public Product editProduct(Product product) {
+		return productDao.updateProduct(productId, productName, productCategory, productRoastLevel, unitPrice, productDescription, productsInStock);
+	}
+
+	@Override
+	public Product deleteProduct(String productId) {
+		return productDao.deleteProductByProductId(productId);
+	}
+
+	@Override
+	public boolean exists(String productId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}
