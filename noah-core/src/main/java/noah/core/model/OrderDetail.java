@@ -33,7 +33,7 @@ public class OrderDetail implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "ODID", nullable = false)
-	private Long Id;
+	private Long id;
 	
 	/**
 	 * For each detail in this list belongs to one order.

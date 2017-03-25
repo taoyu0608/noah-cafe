@@ -35,7 +35,7 @@ public class Order implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "OID", nullable = false)
-	private String Id;
+	private String id;
 	
 	/**
 	 * Many orders can be made by one user

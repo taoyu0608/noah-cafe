@@ -19,7 +19,7 @@ public class ProductViewConverter {
 		target.setId(source.getId());
 		target.setName(source.getName());
 		target.setDisplayName("[ " + source.getName() + " ]");
-		target.setPrice(source.getPrice());
+		target.setPrice(source.getUnitPrice());
 		
 		return target;
 	}
