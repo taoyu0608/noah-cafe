@@ -28,7 +28,7 @@ public class ProductServiceImpl implements noah.core.service.ProductService {
 	}
 
 	@Override
-	public void saveProduct(Product product) {
-		productDao.save(product);		
+	public Product saveProduct(Product product) {
+		return productDao.save(product);		
 	}
 }
