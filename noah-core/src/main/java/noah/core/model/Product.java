@@ -2,10 +2,14 @@ package noah.core.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -20,32 +24,40 @@ public class Product implements Serializable{
 	/**
 	 * UID for serialization version control 
 	 */
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 3001L;
 	
 	/**
 	 * The identity UUID for each product 
 	 */
 	@Id
-	@Column(name = "PRODUCT_ID", length = 32, unique = true, nullable = false)
-	private String productId;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "PID", nullable = false)
+	private Long id;
+	
+	/**
+	 * For each product may be included in one or more order detail
+	 */
+	@OneToMany
+	@Column(name = "PRODUCT_IN_DETAILS")
+	private Set<OrderDetail> orderDetails;
 	
 	/**
 	 * The name for each product
 	 */
-	@Column(name = "PRODUCT_NAME", length = 200, nullable = false)
-	private String productName;
+	@Column(name = "NAME", length = 200, nullable = false)
+	private String name;
 	
 	/**
 	 * The category for each product, i.e. how it's made/brand/kind.
 	 */
-	@Column(name = "PRODUCT_CATEGORY", length = 2, nullable = false)
-	private String productCategory;
+	@Column(name = "CATEGORY", length = 2, nullable = false)
+	private String category;
 	
 	/**
 	 * The roast level for each product,e.g. light, medium, deep, dark.
 	 */
-	@Column(name = "PRODUCT_ROAST_LEVEL", length = 1, nullable = false)
-	private int productRoastLevel;
+	@Column(name = "ROAST_LEVEL", length = 1, nullable = false)
+	private int roastLevel;
 	
 	/**
 	 * The price for each product
@@ -56,12 +68,13 @@ public class Product implements Serializable{
 	/**
 	 * Simple description of product.
 	 */
-	@Column(name = "PRODUCT_DESCRIPTION", length = 200)
-	private String productDescription;
+	@Column(name = "DESCRIPTION", length = 200)
+	private String description;
 	
 	/**
 	 * Quantity of remaining inventory.
 	 */
-	@Column(name = "PRODUCTS_IN_STOCK", length = 10, nullable = false)
-    private int productsInStock;
+	@Column(name = "IN_STOCK_QTY", length = 10, nullable = false)
+    private int inStockQty;
 }
+
