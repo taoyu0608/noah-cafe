@@ -12,10 +12,11 @@ import noah.core.service.OrderService;
 
 @Service
 @Transactional
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
+	
 	@Autowired
 	private OrderDao orderDao;
-	
+
 	@Override
 	public List<Order> getAllOrders() {
 		return orderDao.findAll();
@@ -30,5 +31,5 @@ public class OrderServiceImpl implements OrderService{
 	public Order getOrderById(Long id) {
 		return orderDao.findOne(id);
 	}
-	
+
 }

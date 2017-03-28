@@ -23,7 +23,7 @@ public class ProductConverter {
 		}
 		
 		target.setName(source.getName());
-		target.setPrice(source.getUnitPrice());
+		target.setUnitPrice(source.getUnitPrice());
 		
 		return target;
 	}

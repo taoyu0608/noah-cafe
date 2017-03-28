@@ -22,6 +22,6 @@ public class ProductView {
 	/**
 	 * 商品價格
 	 * */
-	private BigDecimal price; 
+	private BigDecimal unitPrice; 
 	
 }

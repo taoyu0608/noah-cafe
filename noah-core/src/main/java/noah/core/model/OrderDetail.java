@@ -40,14 +40,14 @@ public class OrderDetail implements Serializable{
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@Column(name = "OID", nullable = false)
-	private Long orderId;
+	private Order order;
 	
 	/**
 	 * For each order detail may contain many products.
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@Column(name = "PID", nullable = false)
-	private Long productId;
+	private Product product;
 	
 	/**
 	 * Memo for this detail(e.g. fragile, don't arrive before afternoon...)

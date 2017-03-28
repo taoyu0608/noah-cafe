@@ -16,6 +16,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.google.common.collect.Sets;
+
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,7 +38,7 @@ public class Order implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "OID", nullable = false)
-	private String id;
+	private Long id;
 	
 	/**
 	 * Many orders can be made by one user
@@ -48,7 +51,8 @@ public class Order implements Serializable{
 	 * For each order, many details can be included.
 	 */
 	@OneToMany(fetch = FetchType.LAZY)
-	private Set<OrderDetail> details;
+	@Setter(AccessLevel.NONE)
+	private Set<OrderDetail> details = Sets.newHashSet();
 	
 	/**
 	 * The date that this order was created.
@@ -63,4 +67,9 @@ public class Order implements Serializable{
 	 */
 	@Column(name = "IS_FINISHED")
 	private boolean isFinished;
+	
+	public void appendDetail(OrderDetail detail) {
+		details.add(detail);
+	}
+	
 }
