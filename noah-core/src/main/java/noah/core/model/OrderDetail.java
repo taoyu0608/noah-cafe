@@ -6,9 +6,11 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -38,16 +40,17 @@ public class OrderDetail implements Serializable{
 	/**
 	 * For each detail in this list belongs to one order.
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@Column(name = "OID", nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "order", foreignKey = @ForeignKey(name = "FK_ORDER"))
 	private Order order;
 	
-	/**
-	 * For each order detail may contain many products.
-	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@Column(name = "PID", nullable = false)
-	private Product product;
+//	TODO: 抽出成關聯資料表
+//	/**
+//	 * For each order detail may contain many products.
+//	 */
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "product", foreignKey = @ForeignKey(name = "FK_PRODUCT"))
+//	private Product product;
 	
 	/**
 	 * Memo for this detail(e.g. fragile, don't arrive before afternoon...)
