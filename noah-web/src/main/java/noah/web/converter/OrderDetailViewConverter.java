@@ -4,35 +4,41 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import noah.core.model.Order;
 import noah.core.model.OrderDetail;
+import noah.core.model.Product;
 import noah.web.view.OrderDetailView;
-import noah.web.view.OrderView;
 
 @Component
+@Transactional
 public class OrderDetailViewConverter {
-	
-	public OrderDetailView convert(OrderDetail source){
+
+	public OrderDetailView convert(OrderDetail source) {
+		
 		OrderDetailView target = new OrderDetailView();
 		target.setId(source.getId());
-		target.setOid(source.getOid());
-		//target.setProductName(source.getProductId())
-		target.setUnitPrice(source.getUnitPrice());
+		Order order = source.getOrder();
+		target.setOId(order.getId());
+		Product product = source.getProduct();
+		target.setProductName(product.getName());
+		target.setUnitPrice(product.getUnitPrice());
 		target.setDeliveryDate(source.getDeliveryDate());
 		target.setDeliveredDate(source.getDeliveredDate());
-		target.setRecivedDate(source.getReceivedDate());
+		target.setReceivedDate(source.getReceivedDate());
 		target.setMemo(source.getMemo());
-		
+
 		return target;
 	}
-	
-	public List<OrderDetailView> convert(List<OrderDetail> sources){
+
+	public List<OrderDetailView> convert(List<OrderDetail> sources) {
 		List<OrderDetailView> targets = new ArrayList<>();
-		if(sources!=null & sources.size() > 0){
+		if ( CollectionUtils.isNotEmpty(sources) ) {
 			Iterator<OrderDetail> it = sources.iterator();
-			while(it.hasNext()){
+			while (it.hasNext()) {
 				OrderDetailView temp = convert(it.next());
 				targets.add(temp);
 			}

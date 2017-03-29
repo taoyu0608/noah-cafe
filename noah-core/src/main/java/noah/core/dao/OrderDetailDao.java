@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import noah.core.model.OrderDetail;
 
-public interface OrderDetailDao extends JpaRepository<OrderDetail, Long>{
+public interface OrderDetailDao extends JpaRepository<OrderDetail, Long> {
 
 }

@@ -46,7 +46,7 @@ public class OrderDetailView {
 	/**
 	 * 簽收日
 	 */
-	private Date recivedDate;
+	private Date receivedDate;
 	
 	/**
 	 * 備註

@@ -8,11 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import noah.core.dao.ProductDao;
 import noah.core.model.Product;
+import noah.core.service.ProductService;
 
 
 @Service
 @Transactional
-public class ProductServiceImpl implements noah.core.service.ProductService {
+public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductDao productDao;
