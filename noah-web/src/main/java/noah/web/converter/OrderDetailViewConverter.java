@@ -22,7 +22,7 @@ public class OrderDetailViewConverter {
 		target.setUnitPrice(source.getUnitPrice());
 		target.setDeliveryDate(source.getDeliveryDate());
 		target.setDeliveredDate(source.getDeliveredDate());
-		target.setRecievedDate(source.getReceivedDate());
+		target.setRecivedDate(source.getReceivedDate());
 		target.setMemo(source.getMemo());
 		
 		return target;

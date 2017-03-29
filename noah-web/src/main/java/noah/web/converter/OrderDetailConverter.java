@@ -17,13 +17,14 @@ public class OrderDetailConverter {
 	public OrderDetail convert(OrderDetailView source){
 		OrderDetail target = orderDetailService.getDetailById(source.getId());
 		if(target == null){
+			target = new OrderDetail();
 			target.setId(source.getId());
-			target.setOid(source.getOid());
-			target.setPid(source.getPid());
+			target.setOrderId(source.getOId());
+			target.setProductId(source.getPId());
 			target.setMemo(source.getMemo());
-			target.setDeliveryDate(source.getDeliverDate());
+			target.setDeliveryDate(source.getDeliveryDate());
 			target.setDeliveredDate(source.getDeliveredDate());
-			target.setRecievedDate(source.getRecievedDate());
+			target.setReceivedDate(source.getRecivedDate());
 		}
 		return target;
 	}

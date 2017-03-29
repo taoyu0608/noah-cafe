@@ -19,6 +19,11 @@ public class OrderDetailView {
 	private Long oId;
 	
 	/**
+	 * 產品編號
+	 */
+	private Long pId;
+	
+	/**
 	 * 產品名稱
 	 */
 	private String productName;
