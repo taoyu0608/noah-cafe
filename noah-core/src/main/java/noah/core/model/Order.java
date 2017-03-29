@@ -7,10 +7,11 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -37,22 +38,21 @@ public class Order implements Serializable{
 	 */
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "OID", nullable = false)
 	private Long id;
 	
 	/**
 	 * Many orders can be made by one user
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@Column(name = "USER_NAME", nullable = false)
+	@Column(name = "USERNAME", nullable = false)
 	private String userName;
 	
 	/**
 	 * For each order, many details can be included.
 	 */
-	@OneToMany(fetch = FetchType.LAZY)
 	@Setter(AccessLevel.NONE)
-	private Set<OrderDetail> details = Sets.newHashSet();
+	@OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
+	@JoinColumn(name = "order", foreignKey = @ForeignKey(name = "FK_ORDER_DETAIL"))
+	private Set<OrderDetail> orderDetails = Sets.newHashSet();
 	
 	/**
 	 * The date that this order was created.
@@ -69,7 +69,7 @@ public class Order implements Serializable{
 	private boolean isFinished;
 	
 	public void appendDetail(OrderDetail detail) {
-		details.add(detail);
+		orderDetails.add(detail);
 	}
 	
 }

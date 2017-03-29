@@ -23,9 +23,9 @@ public class OrderDetailViewConverter {
 		target.setId(source.getId());
 		Order order = source.getOrder();
 		target.setOId(order.getId());
-		Product product = source.getProduct();
-		target.setProductName(product.getName());
-		target.setUnitPrice(product.getUnitPrice());
+//		Product product = source.getProduct();
+//		target.setProductName(product.getName());
+//		target.setUnitPrice(product.getUnitPrice());
 		target.setDeliveryDate(source.getDeliveryDate());
 		target.setDeliveredDate(source.getDeliveredDate());
 		target.setReceivedDate(source.getReceivedDate());

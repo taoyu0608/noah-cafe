@@ -28,7 +28,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	@Override
 	public List<OrderDetail> getAllDetailsByOrderId(Long id) {
 		Order order = orderService.getOrderById(id);
-		Set<OrderDetail> details = order.getDetails();
+		Set<OrderDetail> details = order.getOrderDetails();
 		return Lists.newArrayList(details);
 	}
 

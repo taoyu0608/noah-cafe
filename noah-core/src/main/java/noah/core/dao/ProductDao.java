@@ -7,4 +7,3 @@ import noah.core.model.Product;
 public interface ProductDao extends JpaRepository<Product, Long>{
 	
 }
-

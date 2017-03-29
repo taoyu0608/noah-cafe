@@ -11,6 +11,9 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
         ">
 
+	<import resource="test-spring-profiles.xml" />
+	<import resource="test-spring-database.xml" />
+
     <tx:annotation-driven />
     <context:annotation-config />
 

@@ -1,25 +1,22 @@
 package noah.core.model;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "USERS")
 @EqualsAndHashCode(of = { "username" })
-@ToString(of = { "username", "name", "localName" })
+//@ToString(of = { "username", "name", "localName" })
 //public class User implements UserDetails, Serializable {
 public class User implements Serializable {
 
@@ -32,11 +29,6 @@ public class User implements Serializable {
 	@Column(name = "USERNAME", length = 50, unique = true, nullable = false)
 	private String username;
 	
-	/**
-	 * For each user, many orders can be made
-	 */
-	private Set<Order> orders;
-
 	/**
 	 * The password.
 	 */
