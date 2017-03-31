@@ -27,7 +27,7 @@ public class OrderDetail implements Serializable{
 	/**
 	 * UID for serialization version control 
 	 */
-	private static final long serialVersionUID = 4001L;
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * UUID for this order detail.
@@ -40,17 +40,16 @@ public class OrderDetail implements Serializable{
 	/**
 	 * For each detail in this list belongs to one order.
 	 */
-	@ManyToOne
-	@JoinColumn(name = "order", foreignKey = @ForeignKey(name = "FK_ORDER"))
-	private Order order;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CUSTOMERORDER", foreignKey = @ForeignKey(name = "FK_CUSTOMER_ORDER"))
+	private CustomerOrder customerOrder;
 	
-//	TODO: 抽出成關聯資料表
-//	/**
-//	 * For each order detail may contain many products.
-//	 */
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "product", foreignKey = @ForeignKey(name = "FK_PRODUCT"))
-//	private Product product;
+	/**
+	 * For each order detail may contain many products.
+	 */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "product", foreignKey = @ForeignKey(name = "FK_PRODUCT"))
+	private Product product;
 	
 	/**
 	 * Memo for this detail(e.g. fragile, don't arrive before afternoon...)

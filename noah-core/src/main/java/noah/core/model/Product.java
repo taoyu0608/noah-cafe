@@ -22,7 +22,7 @@ public class Product implements Serializable{
 	/**
 	 * UID for serialization version control 
 	 */
-	private static final long serialVersionUID = 3001L;
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * The identity UUID for each product 

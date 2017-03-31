@@ -2,7 +2,7 @@ package noah.core.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,48 +12,44 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Lists;
 
 import lombok.AccessLevel;
-import lombok.Getter;
+import lombok.Data;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @Entity
-@Table(name = "ORDER")
-public class Order implements Serializable{
-	/**
-	 * UID for serialization version control 
-	 */
-	private static final long serialVersionUID = 2001L;
-	
-	/**
-	 * UUID for this order.
-	 */
+@Table(name = "CUSTOMER_ORDER")
+public class CustomerOrder implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	/**
-	 * Many orders can be made by one user
+	 * The customer info.
 	 */
-	@Column(name = "USERNAME", nullable = false)
-	private String userName;
+	@ManyToOne
+	@JoinColumn(name = "FK_CUSTOMER")
+	private Customer customer;
 	
 	/**
 	 * For each order, many details can be included.
 	 */
 	@Setter(AccessLevel.NONE)
 	@OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
-	@JoinColumn(name = "order", foreignKey = @ForeignKey(name = "FK_ORDER_DETAIL"))
-	private Set<OrderDetail> orderDetails = Sets.newHashSet();
-	
+	@JoinColumn(name = "CUSTOMERORDER", foreignKey = @ForeignKey(name = "FK_ORDER_DETAIL"))
+	private List<OrderDetail> orderDetails = Lists.newArrayList();
+
 	/**
 	 * The date that this order was created.
 	 */
@@ -66,10 +62,10 @@ public class Order implements Serializable{
 	 * Actual delivery/delivered/received date will be in the details.
 	 */
 	@Column(name = "IS_FINISHED")
-	private boolean isFinished;
+	private boolean isFinished = false;
+
 	
 	public void appendDetail(OrderDetail detail) {
 		orderDetails.add(detail);
 	}
-	
 }
