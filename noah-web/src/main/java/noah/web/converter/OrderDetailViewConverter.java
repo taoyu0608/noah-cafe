@@ -8,9 +8,8 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import noah.core.model.Order;
+import noah.core.model.CustomerOrder;
 import noah.core.model.OrderDetail;
-import noah.core.model.Product;
 import noah.web.view.OrderDetailView;
 
 @Component
@@ -21,7 +20,7 @@ public class OrderDetailViewConverter {
 		
 		OrderDetailView target = new OrderDetailView();
 		target.setId(source.getId());
-		Order order = source.getOrder();
+		CustomerOrder order = source.getCustomerOrder();
 		target.setOId(order.getId());
 //		Product product = source.getProduct();
 //		target.setProductName(product.getName());

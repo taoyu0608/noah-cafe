@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import noah.core.model.Product;
 
-@Rollback(value = true)
+@Rollback(value = false)
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:test-spring-noah-core.xml")
 public class ProductDaoUnitTest {

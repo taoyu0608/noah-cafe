@@ -1,19 +1,16 @@
 package noah.core.service.impl;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.google.common.collect.Lists;
-
+import noah.core.dao.CustomerOrderDao;
 import noah.core.dao.OrderDetailDao;
-import noah.core.model.Order;
+import noah.core.model.CustomerOrder;
 import noah.core.model.OrderDetail;
 import noah.core.service.OrderDetailService;
-import noah.core.service.OrderService;
 
 @Service
 @Transactional
@@ -23,13 +20,13 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	private OrderDetailDao orderDetailDao;
 	
 	@Autowired
-	private OrderService orderService;
+	private CustomerOrderDao customerOrderDao;
 
 	@Override
-	public List<OrderDetail> getAllDetailsByOrderId(Long id) {
-		Order order = orderService.getOrderById(id);
-		Set<OrderDetail> details = order.getOrderDetails();
-		return Lists.newArrayList(details);
+	public List<OrderDetail> getAllDetailsByCustomerOrderId(Long id) {
+		CustomerOrder customerOrder = customerOrderDao.getOne(id);
+		List<OrderDetail> orderDetails = customerOrder.getOrderDetails();
+		return orderDetails;
 	}
 
 	@Override
