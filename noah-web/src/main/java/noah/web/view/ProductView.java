@@ -1,6 +1,7 @@
 package noah.web.view;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import lombok.Data;
 
@@ -24,4 +25,18 @@ public class ProductView {
 	 * */
 	private BigDecimal unitPrice; 
 	
+	/**
+	 * 烘培方式
+	 */
+	private List<Integer> cookTypes;
+	
+	/**
+	 * 圖片位址
+	 * */
+	private String imageUrl;
+	
+	/**
+	 * 種類：掛耳式咖啡 / 咖啡豆
+	 * */
+	private Integer category;
 }

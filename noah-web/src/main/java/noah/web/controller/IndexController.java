@@ -18,6 +18,12 @@ System.err.println(1);
 		return "index";
 	}
 	
+	@RequestMapping("/products")
+	public String productPage(Model model) {
+		setupVersion(model);
+		return "products";
+	}
+	
 	private void setupVersion(Model model) {
 		model.addAttribute("systemVersion", systemVersion);
 	}
