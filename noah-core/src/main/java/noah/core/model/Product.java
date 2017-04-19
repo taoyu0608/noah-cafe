@@ -3,11 +3,14 @@ package noah.core.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -36,12 +39,6 @@ public class Product implements Serializable{
 	 */
 	@Column(name = "NAME", length = 200, nullable = false)
 	private String name;
-	
-	/**
-	 * The category for each product, i.e. how it's made/brand/kind.
-	 */
-//	@Column(name = "CATEGORY", length = 2, nullable = false)
-//	private String category;
 	
 	/**
 	 * The roast level for each product,e.g. light, medium, deep, dark.
