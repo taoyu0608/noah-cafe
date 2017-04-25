@@ -14,7 +14,6 @@ public class IndexController {
 	@RequestMapping("/")
 	public String rootPage(Model model) {
 		setupVersion(model);
-System.err.println(1);
 		return "index";
 	}
 	
@@ -22,6 +21,12 @@ System.err.println(1);
 	public String productPage(Model model) {
 		setupVersion(model);
 		return "products";
+	}
+	
+	@RequestMapping("/demo")
+	public String demoPage(Model model) {
+		setupVersion(model);
+		return "demo";
 	}
 	
 	private void setupVersion(Model model) {

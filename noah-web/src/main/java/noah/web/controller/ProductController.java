@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,14 @@ public class ProductController {
 	}
 	
 	@ResponseBody
+	@RequestMapping("/listAll")
+	public List<ProductView> showAll() {
+		List<Product> products = productService.getAllProducts();
+		List<ProductView> productViews = productViewConverter.convert(products);
+		return productViews;
+	}
+	
+	@ResponseBody
 	@RequestMapping("/list/{category}")
 	public List<ProductView> showAllProducts(
 			@PathVariable("category") Integer category) {
@@ -54,6 +63,7 @@ public class ProductController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@Transactional
 	public String saveProduct(@RequestBody ProductView view) {
 		
 		Product product = productConverter.convert(view);
