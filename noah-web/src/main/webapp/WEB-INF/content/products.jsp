@@ -7,8 +7,39 @@
 <head>
 	<title>諾亞咖啡 - 商品一覽</title>
 	
+	<style>
+	.product-content {
+		width: 100%;
+	}
+	
+	.product-content-center {
+		text-align: center;
+	}
+	
+	.product-row-padding {
+		padding: 10px;
+	}
+	
+	.each-product {
+		border: 1px solid gray;
+		min-width: 600px;
+		margin: 5px;
+	}
+	
+	.next-step {
+		background-color: #00AAFF !important;
+	}
+	
+	.next-step:hover {
+		cursor: pointer;
+		background-color: #00CCFF !important;
+	}
+	</style>
+	
 	<script>
 	noahApp.controller("productController", function($scope, $http) {
+		
+		$scope.buyAllTotal = 0;	// 購物總金額
 		
 		$scope.loadProducts = function() {
 			$http.get("${contextPath}/product/list/1").then(function(response) {
@@ -19,48 +50,68 @@
 // 		        $scope.beanProducts = response.data;
 // 	    	});			
 		};
+		
 		$scope.loadProducts();
+		
+		$scope.caculateTotal = function(packageProduct, index) {
+			packageProduct.total[index] = packageProduct.buyUnit[index] * packageProduct.unitPrice;
+			$scope.caculateBuyAllTotal();
+		};
+		
+		$scope.caculateBuyAllTotal = function() {
+			var summary = 0;
+			angular.forEach($scope.packageProducts, function(packageProduct, key) {
+				angular.forEach(packageProduct.cookTypes, function(cookType, key) {
+					summary = summary + packageProduct.total[key];
+				});
+			});
+			$scope.buyAllTotal = summary;
+		};
 	});
 	</script>
 </head>
 <body>
     <div ng-controller="productController">
     	<section>
-			<h4><span class="badge badge-pill badge-success">掛耳式咖啡</span></h4>
+			<h4>
+				<span class="badge badge-pill badge-success">掛耳式咖啡</span>
+				<span style="text-align: center">目前購買總金額：＄{{ buyAllTotal | currency }}</span>
+				<span style="float: right"><h4><span class="badge badge-success next-step">確定選購</span></h4></span>
+			</h4>
 			
-			<div class="container">
-				<div class="row">
-					<div class="col" ng-repeat="packageProduct in packageProducts">
-						<div>
-							<img width="100" alt="衣索比亞日曬耶珈雪啡" src="https://fsv.cmoney.tw/cmstatic/notes/capture/37180/20140911113225993.jpg" />
-						</div>
-						<div class="selectedMenu" style="width: 500px;">
-							<table class="table">
-								<tr>
-									<th>ID</th>
-									<th>選擇</th>
-									<th>烘培方式</th>
-									<th>數量（半磅為一單位）</th>
-									<th>價格</th>
-									<th>單項金額</th>
-								</tr>
-								<tr ng-repeat="cookType in packageProduct.cookTypes">
-									<td ng-bind="packageProduct.id"></td>
-									<td><div class="checkbox-inline"><input type="checkbox" /></div></td>
-									<td>
-										<div ng-if="cookType == 1">深培</div>
-										<div ng-if="cookType == 2">中培</div>
-										<div ng-if="cookType == 3">淺培</div>
-									</td>
-									<td>
-										<button ng-click="minus()" class="btn btn-outline-primary btn-sm"><i class="fa fa-minus" aria-hidden="true"></i></button>
-										<input ng-model="packageProduct.count" type="text" style="width: 40px" />
-										<button ng-click="add()" class="btn btn-outline-primary btn-sm"><i class="fa fa-plus"></i></button>
-									</td>
-									<td ng-bind="packageProduct.unitPrice"></td>
-									<td>$待計算</td>
-								</tr>
-							</table>
+			<div class="product-content">
+				<div class="product-content-center">
+					<div class="row product-row-padding">
+						<div class="col each-product" ng-repeat="packageProduct in packageProducts">
+							<div>
+								<img width="300" height="300" alt="{{packageProduct.imageDisplayName}}" 
+									src="${contextPath}/img/products/{{packageProduct.imageName}}.jpg" />
+							</div>
+							<div class="selectedMenu">
+								<table class="table table-zimbra">
+									<tr>
+<!-- 										<th>ID</th> -->
+										<th>烘培方式</th>
+										<th>數量（半磅為一單位）</th>
+										<th>價格</th>
+										<th>單項金額</th>
+									</tr>
+									<tr ng-repeat="cookType in packageProduct.cookTypes track by $index">
+<!-- 										<td ng-bind="packageProduct.id"></td> -->
+										<td>{{ cookType.cookTypeName }}</td>
+										<td>
+											<input 
+												ng-init="packageProduct.buyUnit[$index] = 0" 
+												ng-model="packageProduct.buyUnit[$index]"
+												ng-change="caculateTotal(packageProduct, $index)" 
+												type="number" 
+												style="width: 80px" />
+										</td>
+										<td ng-bind="packageProduct.unitPrice"></td>
+										<td ng-init="packageProduct.total[$index] = 0" ng-bind="packageProduct.total[$index]"></td>
+									</tr>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>

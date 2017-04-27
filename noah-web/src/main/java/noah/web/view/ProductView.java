@@ -28,12 +28,17 @@ public class ProductView {
 	/**
 	 * 烘培方式
 	 */
-	private List<Integer> cookTypes;
+	private List<CookTypeView> cookTypes;
 	
 	/**
 	 * 圖片位址
 	 * */
-	private String imageUrl;
+	private String imageName;
+	
+	/**
+	 * 圖片名稱(給前端 alt 顯示用)
+	 * */
+	private String imageDisplayName;
 	
 	/**
 	 * 種類：掛耳式咖啡 / 咖啡豆
