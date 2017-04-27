@@ -1,2 +1,2 @@
-INSERT INTO Product (name, price) VALUES ('挪亞咖啡', 250);
-INSERT INTO Product (name, price) VALUES ('方舟咖啡', 250);
+INSERT INTO Product (NAME, UNIT_PRICE, IN_STOCK_QTY) VALUES ('挪亞咖啡', 250, 0);
+INSERT INTO Product (NAME, UNIT_PRICE, IN_STOCK_QTY) VALUES ('方舟咖啡', 250, 0);
