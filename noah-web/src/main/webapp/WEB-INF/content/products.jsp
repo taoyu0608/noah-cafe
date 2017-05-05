@@ -75,7 +75,7 @@
     	<section>
 			<h4>
 				<span class="badge badge-pill badge-success">掛耳式咖啡</span>
-				<span style="text-align: center">目前購買總金額：＄{{ buyAllTotal | currency }}</span>
+				<span style="text-align: center">目前購買總金額：{{ buyAllTotal | currency }}</span>
 				<span style="float: right"><h4><span class="badge badge-success next-step">確定選購</span></h4></span>
 			</h4>
 			
