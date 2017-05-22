@@ -27,7 +27,7 @@ public class Category implements Serializable{
 	/**
 	 * UID for serialization version control 
 	 */
-	private static final long serialVersionUID = 3L;
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,8 +46,8 @@ public class Category implements Serializable{
 	private String description;
 
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "CATEGORY_PRODUCT", foreignKey = @ForeignKey(name = "FK_CATEGORY_PRODUCTS") )
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "CATEGORY_PRODUCT", foreignKey = @ForeignKey(name = "FK_CATEGORY_PRODUCTS") )
 	private List<Product> products = Lists.newArrayList();
 	
 	/**

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import noah.core.model.Product;
 
@@ -34,4 +33,5 @@ public class ProductDaoUnitTest {
 		Assert.assertTrue(savedProduct.getId() > 0);
 		Assert.assertEquals(coffeeName, savedProduct.getName());
 	}
+	
 }

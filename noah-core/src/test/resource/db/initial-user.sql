@@ -1,0 +1,1 @@
+INSERT INTO USERS (username, password, name, local_name, email, is_enabled, is_locked, is_expired) VALUES ('admin', '$2a$10$wMLxkqNoU9QiyTaepUaYaOwHYsRQqNYbZ6G3YfwHeKwE1o0DjQs32', 'Admin', '管理者', 'admin@yahoo.com.tw', true, false, false);
