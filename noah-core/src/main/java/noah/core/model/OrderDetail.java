@@ -3,6 +3,7 @@ package noah.core.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -40,15 +41,15 @@ public class OrderDetail implements Serializable{
 	/**
 	 * For each detail in this list belongs to one order.
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "CUSTOMERORDER", foreignKey = @ForeignKey(name = "FK_CUSTOMER_ORDER"))
 	private CustomerOrder customerOrder;
 	
 	/**
 	 * For each order detail may contain many products.
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "product", foreignKey = @ForeignKey(name = "FK_PRODUCT"))
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "PRODUCT", foreignKey = @ForeignKey(name = "FK_PRODUCT"))
 	private Product product;
 	
 	/**

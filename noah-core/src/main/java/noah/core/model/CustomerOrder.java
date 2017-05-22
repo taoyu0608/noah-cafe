@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -38,7 +39,7 @@ public class CustomerOrder implements Serializable {
 	/**
 	 * The customer info.
 	 */
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "FK_CUSTOMER")
 	private Customer customer;
 	
@@ -46,7 +47,7 @@ public class CustomerOrder implements Serializable {
 	 * For each order, many details can be included.
 	 */
 	@Setter(AccessLevel.NONE)
-	@OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "CUSTOMERORDER", foreignKey = @ForeignKey(name = "FK_ORDER_DETAIL"))
 	private List<OrderDetail> orderDetails = Lists.newArrayList();
 
