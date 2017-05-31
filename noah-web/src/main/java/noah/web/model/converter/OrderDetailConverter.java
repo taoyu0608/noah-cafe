@@ -1,5 +1,5 @@
 
-package noah.web.converter;
+package noah.web.model.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

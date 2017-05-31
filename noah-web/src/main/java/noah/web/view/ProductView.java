@@ -28,7 +28,7 @@ public class ProductView {
 	/**
 	 * 烘培方式
 	 */
-	private List<CookTypeView> cookTypes;
+	private List<RoastTypeView> roastTypes;
 	
 	/**
 	 * 圖片位址

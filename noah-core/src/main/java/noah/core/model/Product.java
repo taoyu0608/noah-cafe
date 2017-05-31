@@ -2,12 +2,15 @@ package noah.core.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -34,13 +37,12 @@ public class Product implements Serializable {
 	 */
 	@Column(name = "NAME", length = 200, nullable = false)
 	private String name;
-
+	
 	/**
-	 * The roast level for each product,e.g. light, medium, deep, dark.
+	 * The image name for each product
 	 */
-	// TODO: 這邊要抽開，變成可以設定此產品有哪些烘培方式，是多個的
-	// @Column(name = "ROAST_LEVEL", length = 1, nullable = false)
-	// private int roastLevel;
+	@Column(name = "IMG_NAME", length = 50)
+	private String imageName;
 
 	/**
 	 * The price for each product
@@ -59,5 +61,8 @@ public class Product implements Serializable {
 	 */
 	@Column(name = "IN_STOCK_QTY", length = 10, nullable = false)
 	private int inStockQty;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	private List<RoastType> roastTypes;
 
 }

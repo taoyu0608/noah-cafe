@@ -22,7 +22,7 @@
 	
 	.each-product {
 		border: 1px solid gray;
-		min-width: 600px;
+		min-width: 400px;
 		margin: 5px;
 	}
 	
@@ -61,7 +61,7 @@
 		$scope.caculateBuyAllTotal = function() {
 			var summary = 0;
 			angular.forEach($scope.packageProducts, function(packageProduct, key) {
-				angular.forEach(packageProduct.cookTypes, function(cookType, key) {
+				angular.forEach(packageProduct.roastTypes, function(roastType, key) {
 					summary = summary + packageProduct.total[key];
 				});
 			});
@@ -73,9 +73,12 @@
 <body>
     <div ng-controller="productController">
     	<section>
+    		<div>
+    			<h4><span>目前購買總金額：{{ buyAllTotal | currency }}</span></h4>
+			</div>
+			
 			<h4>
 				<span class="badge badge-pill badge-success">掛耳式咖啡</span>
-				<span style="text-align: center">目前購買總金額：{{ buyAllTotal | currency }}</span>
 				<span style="float: right"><h4><span class="badge badge-success next-step">確定選購</span></h4></span>
 			</h4>
 			
@@ -96,9 +99,9 @@
 										<th>價格</th>
 										<th>單項金額</th>
 									</tr>
-									<tr ng-repeat="cookType in packageProduct.cookTypes track by $index">
+									<tr ng-repeat="roastType in packageProduct.roastTypes track by $index">
 <!-- 										<td ng-bind="packageProduct.id"></td> -->
-										<td>{{ cookType.cookTypeName }}</td>
+										<td>{{ roastType.roastTypeName }}</td>
 										<td>
 											<input 
 												ng-init="packageProduct.buyUnit[$index] = 0" 

@@ -36,13 +36,13 @@ public class RoastTypeDaoUnitTest {
 		p2.setName("產品2");
 		p2.setUnitPrice(BigDecimal.valueOf(450));
 		
-		roastType.getProducts().add(p1);
-		roastType.getProducts().add(p2);
+//		roastType.getProducts().add(p1);
+//		roastType.getProducts().add(p2);
 		//Act
 		RoastType savedRoastType = roastTypeDao.save(roastType);
 		
 		//Assert
-		Assert.assertTrue(savedRoastType.getProducts().size() == 2);		
+//		Assert.assertTrue(savedRoastType.getProducts().size() == 2);		
 	}
 	
 //	@Test

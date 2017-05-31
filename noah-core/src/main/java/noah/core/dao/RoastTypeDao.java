@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import noah.core.model.RoastType;
 
-public interface RoastTypeDao extends JpaRepository<RoastType, Long>{
+public interface RoastTypeDao extends JpaRepository<RoastType, Integer> {
 
 }
