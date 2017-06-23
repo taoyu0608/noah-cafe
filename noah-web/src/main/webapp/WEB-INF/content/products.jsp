@@ -41,6 +41,8 @@
 		
 		$scope.buyAllTotal = 0;	// 購物總金額
 		
+		$scope.productCart = [];
+		
 		$scope.loadProducts = function() {
 			$http.get("${contextPath}/product/list/1").then(function(response) {
 		        $scope.packageProducts = response.data;
@@ -52,13 +54,13 @@
 		};
 		
 		$scope.loadProducts();
-		
-		$scope.caculateTotal = function(packageProduct, index) {
+			
+		$scope.calculateTotal = function(packageProduct, index) {
 			packageProduct.total[index] = packageProduct.buyUnit[index] * packageProduct.unitPrice;
-			$scope.caculateBuyAllTotal();
+			$scope.calculateBuyAllTotal();
 		};
 		
-		$scope.caculateBuyAllTotal = function() {
+		$scope.calculateBuyAllTotal = function() {
 			var summary = 0;
 			angular.forEach($scope.packageProducts, function(packageProduct, key) {
 				angular.forEach(packageProduct.roastTypes, function(roastType, key) {
@@ -67,6 +69,50 @@
 			});
 			$scope.buyAllTotal = summary;
 		};
+		
+		$scope.addCart = function(packageProduct, index){
+			//每種產品各三種烘焙方式，所以判斷是否唯一則以productId+index(RoastType)判斷。
+			var alreadyInList = false;
+			angular.forEach($scope.productCart, function(product, key){			
+				
+			});
+		}
+		
+		$scope.handleAmountChange = function(packageProduct,index){
+			$scope.calculateTotal(packageProduct,index);
+			$scope.addCart(packageProduct,index);
+		};
+		
+		
+		$scope.checkout = function(){
+			var cart = [];
+			angular.forEach($scope.packageProducts,function(packageProduct,index){
+				var currentPid = packageProduct.id;
+				angular.forEach(packageProduct.buyUnit, function(buyUnit, unitIndex){
+					if(buyUnit > 0){
+						cart.push({
+							productId: currentPid,
+							count: buyUnit,
+							roastTypeId: packageProduct.roastTypes[unitIndex].roastTypeId
+						});
+					}
+				});
+			});
+			
+			$http({
+				method:'POST',
+				url:'${contextPath}/product/save',
+				data:cart
+			}).success(function(data, status, headers, config){
+				console.log(data);
+			}).error(function(response){
+				
+			}).finally(function(){
+				
+			});
+		};
+		
+		
 	});
 	</script>
 </head>
@@ -79,7 +125,7 @@
 			
 			<h4>
 				<span class="badge badge-pill badge-success">掛耳式咖啡</span>
-				<span style="float: right"><h4><span class="badge badge-success next-step">確定選購</span></h4></span>
+				<span style="float: right"><h4><span class="badge badge-success next-step" ng-click="checkout()">確定選購</span></h4></span>
 			</h4>
 			
 			<div class="product-content">
@@ -106,7 +152,7 @@
 											<input 
 												ng-init="packageProduct.buyUnit[$index] = 0" 
 												ng-model="packageProduct.buyUnit[$index]"
-												ng-change="caculateTotal(packageProduct, $index)" 
+												ng-change="handleAmountChange(packageProduct, $index);" 
 												type="number" 
 												style="width: 80px" />
 										</td>

@@ -16,10 +16,11 @@ import com.google.common.collect.Lists;
 
 import noah.core.model.Product;
 import noah.core.service.ProductService;
-import noah.web.view.RoastTypeView;
-import noah.web.view.converter.ProductViewConverter;
+import noah.web.form.ProductForm;
 import noah.web.model.converter.ProductConverter;
 import noah.web.view.ProductView;
+import noah.web.view.RoastTypeView;
+import noah.web.view.converter.ProductViewConverter;
 
 @Controller
 @RequestMapping("product")
@@ -61,11 +62,12 @@ public class ProductController {
 	@ResponseBody
 	@Transactional
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String saveProduct(@RequestBody ProductView view) {
+	public String saveProduct(@RequestBody List<ProductForm> form) {
 		
-		Product product = productConverter.convert(view);
-		productService.saveProduct(product);
-		
+		System.out.println(form);
+//		Product product = productConverter.convert(view);
+//		productService.saveProduct(product);
+//		
 		return "success";
 	}
 	
