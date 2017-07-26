@@ -39,9 +39,8 @@
 	<script>
 	noahApp.controller("productController", function($scope, $http) {
 		
-		$scope.buyAllTotal = 0;	// 購物總金額
-		
-		$scope.productCart = [];
+		$scope.buyAllTotal = 0;	// 購物總金額		
+		$scope.productCart = [];// 勾選的產品陣列
 		
 		$scope.loadProducts = function() {
 			$http.get("${contextPath}/product/list/1").then(function(response) {
@@ -56,7 +55,7 @@
 		$scope.loadProducts();
 			
 		$scope.calculateTotal = function(packageProduct, index) {
-			packageProduct.total[index] = packageProduct.buyUnit[index] * packageProduct.unitPrice;
+			packageProduct.total[index] = packageProduct.qty[index] * packageProduct.unitPrice;
 			$scope.calculateBuyAllTotal();
 		};
 		
@@ -70,46 +69,53 @@
 			$scope.buyAllTotal = summary;
 		};
 		
-		$scope.addCart = function(packageProduct, index){
-			//每種產品各三種烘焙方式，所以判斷是否唯一則以productId+index(RoastType)判斷。
-			var alreadyInList = false;
-			angular.forEach($scope.productCart, function(product, key){			
-				
-			});
-		}
-		
-		$scope.handleAmountChange = function(packageProduct,index){
-			$scope.calculateTotal(packageProduct,index);
-			$scope.addCart(packageProduct,index);
-		};
-		
-		
 		$scope.checkout = function(){
 			var cart = [];
 			angular.forEach($scope.packageProducts,function(packageProduct,index){
 				var currentPid = packageProduct.id;
-				angular.forEach(packageProduct.buyUnit, function(buyUnit, unitIndex){
-					if(buyUnit > 0){
+				angular.forEach(packageProduct.qty, function(qty, unitIndex){
+					if(qty > 0){
 						cart.push({
 							productId: currentPid,
-							count: buyUnit,
+							count: qty,
 							roastTypeId: packageProduct.roastTypes[unitIndex].roastTypeId
 						});
 					}
 				});
 			});
 			
-			$http({
-				method:'POST',
-				url:'${contextPath}/product/save',
-				data:cart
-			}).success(function(data, status, headers, config){
-				console.log(data);
-			}).error(function(response){
+			var form = document.createElement('form');
+			form.setAttribute('action','${contextPath}/product/save');
+			form.setAttribute('method','post');
+			form.setAttribute('hidden','true');
+			form.setAttribute('modelAttribute','productFormWrapper');
+			
+			var itemsCount = cart.length;
+			
+			for(var i =0; i<itemsCount; i++){
+				var pid = document.createElement('input');
+				pid.setAttribute('type','text');
+				pid.setAttribute('name', 'productForm['+i+'].productId');
+				pid.setAttribute('value',cart[i].productId);
 				
-			}).finally(function(){
+				form.appendChild(pid);
 				
-			});
+				var count = document.createElement('input');
+				count.setAttribute('type','text');
+				count.setAttribute('name', 'productForm['+i+'].count');
+				count.setAttribute('value',cart[i].count);
+				
+				form.appendChild(count);
+				
+				var roastTypeId = document.createElement('input');
+				roastTypeId.setAttribute('type','text');
+				roastTypeId.setAttribute('name', 'productForm['+i+'].roastTypeId');
+				roastTypeId.setAttribute('value',cart[i].roastTypeId);
+				
+				form.appendChild(roastTypeId);				
+			}
+			document.body.appendChild(form);
+			form.submit();
 		};
 		
 		
@@ -131,6 +137,7 @@
 			<div class="product-content">
 				<div class="product-content-center">
 					<div class="row product-row-padding">
+						<!-- 各產品 -->
 						<div class="col each-product" ng-repeat="packageProduct in packageProducts">
 							<div>
 								<img width="300" height="300" alt="{{packageProduct.imageDisplayName}}" 
@@ -139,20 +146,20 @@
 							<div class="selectedMenu">
 								<table class="table table-zimbra">
 									<tr>
-<!-- 										<th>ID</th> -->
 										<th>烘培方式</th>
 										<th>數量（半磅為一單位）</th>
 										<th>價格</th>
 										<th>單項金額</th>
 									</tr>
+									
+									<!-- 依列出每項產品有的烘焙方式 -->
 									<tr ng-repeat="roastType in packageProduct.roastTypes track by $index">
-<!-- 										<td ng-bind="packageProduct.id"></td> -->
 										<td>{{ roastType.roastTypeName }}</td>
 										<td>
 											<input 
-												ng-init="packageProduct.buyUnit[$index] = 0" 
-												ng-model="packageProduct.buyUnit[$index]"
-												ng-change="handleAmountChange(packageProduct, $index);" 
+												ng-init="packageProduct.qty[$index] = 0" 
+												ng-model="packageProduct.qty[$index]"
+												ng-change="calculateTotal(packageProduct, $index);" 
 												type="number" 
 												style="width: 80px" />
 										</td>

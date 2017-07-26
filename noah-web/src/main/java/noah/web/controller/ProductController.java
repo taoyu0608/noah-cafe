@@ -6,17 +6,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.common.collect.Lists;
 
 import noah.core.model.Product;
 import noah.core.service.ProductService;
-import noah.web.form.ProductForm;
+import noah.web.form.ProductFormWrapper;
 import noah.web.model.converter.ProductConverter;
 import noah.web.view.ProductView;
 import noah.web.view.RoastTypeView;
@@ -59,16 +61,16 @@ public class ProductController {
 		return productViews;
 	}
 	
-	@ResponseBody
-	@Transactional
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String saveProduct(@RequestBody List<ProductForm> form) {
-		
-		System.out.println(form);
-//		Product product = productConverter.convert(view);
-//		productService.saveProduct(product);
-//		
-		return "success";
+	@RequestMapping(value = "/save", method = RequestMethod.POST)	
+	public String saveProduct(
+			@ModelAttribute("productFormWrapper") ProductFormWrapper productFormWrapper, RedirectAttributes model) {		
+		model.addFlashAttribute("selectedProducts", productFormWrapper.getProductForm());
+		return "redirect:/product/chosenList";
+	}
+	
+	@RequestMapping(value = "/chosenList", method = RequestMethod.GET)
+	public String displayChosenList(){
+		return "chosenList";
 	}
 	
 	private List<ProductView> mockProduct(Integer category, Integer count) {
