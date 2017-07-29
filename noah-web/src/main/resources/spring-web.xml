@@ -19,7 +19,8 @@
 	<import resource="classpath*:/spring-noah-core.xml" />
 
     <tx:annotation-driven />
-    <context:component-scan base-package="noah.web" />
+    <context:component-scan base-package="noah.web.view.converter" />
+    <context:component-scan base-package="noah.web.controller" />
 
     <mvc:default-servlet-handler />
     <mvc:resources location="/resources/" mapping="/resources/**" />

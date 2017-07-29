@@ -6,18 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import noah.api.converter.ModelConverter;
-import noah.core.model.Product;
+import noah.core.domain.ProductDomain;
 import noah.web.view.ProductView;
 import noah.web.view.RoastTypeView;
 
 @Component
-public class ProductViewConverter extends ModelConverter<Product, ProductView> {
+public class ProductViewConverter extends ModelConverter<ProductDomain, ProductView> {
 
 	@Autowired
 	private RoastTypeViewConverter roastTypeViewConverter;
 	
 	@Override
-	protected ProductView mapping(Product source) {
+	protected ProductView mapping(ProductDomain source) {
 
 		ProductView target = new ProductView();
 		target.setId(source.getId());

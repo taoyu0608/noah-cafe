@@ -3,14 +3,14 @@ package noah.web.view.converter;
 import org.springframework.stereotype.Component;
 
 import noah.api.converter.ModelConverter;
-import noah.core.model.RoastType;
+import noah.core.domain.RoastTypeDomain;
 import noah.web.view.RoastTypeView;
 
 @Component
-public class RoastTypeViewConverter extends ModelConverter<RoastType, RoastTypeView> {
+public class RoastTypeViewConverter extends ModelConverter<RoastTypeDomain, RoastTypeView> {
 
 	@Override
-	protected RoastTypeView mapping(RoastType source) {
+	protected RoastTypeView mapping(RoastTypeDomain source) {
 
 		RoastTypeView target = new RoastTypeView();
 		target.setRoastTypeId(source.getId());
