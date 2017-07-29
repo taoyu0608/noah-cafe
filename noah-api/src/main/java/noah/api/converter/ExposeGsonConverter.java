@@ -14,7 +14,7 @@ import com.google.gson.GsonBuilder;
 
 import noah.api.gson.ISODateTimeAdapter;
 
-abstract public class GsonConverter2 {
+abstract public class ExposeGsonConverter {
 
 	public static <T> T convert(Object model, Class<T> clazz) {
 

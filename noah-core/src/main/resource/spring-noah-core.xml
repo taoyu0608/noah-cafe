@@ -14,6 +14,7 @@
     <tx:annotation-driven />
     <context:annotation-config />
 
+    <context:component-scan base-package="noah.core.domain.converter" />
     <context:component-scan base-package="noah.core.service" />
 
 </beans>

@@ -43,7 +43,7 @@
 		$scope.productCart = [];// 勾選的產品陣列
 		
 		$scope.loadProducts = function() {
-			$http.get("${contextPath}/product/list/1").then(function(response) {
+			$http.get("${contextPath}/product/list/category/1").then(function(response) {
 		        $scope.packageProducts = response.data;
 	    	});			
 			

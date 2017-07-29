@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import noah.core.dao.CategoryDao;
 import noah.core.dao.ProductDao;
+import noah.core.domain.ProductDomain;
+import noah.core.domain.converter.ProductDomainConverter;
 import noah.core.model.Category;
 import noah.core.model.Product;
 import noah.core.service.ProductService;
@@ -22,6 +24,9 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Autowired
 	private CategoryDao categoryDao;
+	
+	@Autowired
+	private ProductDomainConverter productDomainConverter;
 
 	@Override
 	public List<Product> getAllProducts() {
@@ -45,5 +50,17 @@ public class ProductServiceImpl implements ProductService {
 		List<Product> products = category.getProducts();
 		
 		return products;
+	}
+
+	@Override
+	public List<ProductDomain> getAllProductDomains() {
+		List<Product> products = this.getAllProducts();
+		return productDomainConverter.convert(products);
+	}
+
+	@Override
+	public List<ProductDomain> getProductDomainsByCategory(Integer categoryId) {
+		List<Product> productsByCategory = this.getProductsByCategory(categoryId);
+		return productDomainConverter.convert(productsByCategory);
 	}
 }
