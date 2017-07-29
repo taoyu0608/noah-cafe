@@ -65,12 +65,7 @@ public class ProductController {
 	public String saveProduct(
 			@ModelAttribute("productFormWrapper") ProductFormWrapper productFormWrapper, RedirectAttributes model) {		
 		model.addFlashAttribute("selectedProducts", productFormWrapper.getProductForm());
-		return "redirect:/product/chosenList";
-	}
-	
-	@RequestMapping(value = "/chosenList", method = RequestMethod.GET)
-	public String displayChosenList(){
-		return "chosenList";
+		return "redirect:/order/chosenList";
 	}
 	
 	private List<ProductView> mockProduct(Integer category, Integer count) {
