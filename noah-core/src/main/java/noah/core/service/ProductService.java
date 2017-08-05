@@ -16,6 +16,8 @@ public interface ProductService {
 	List<ProductDomain> getProductDomainsByCategory(Integer categoryId);
 
 	Product getProductById(Long id);
+	
+	ProductDomain getProductDomainById(Long id);
 
 	Product saveProduct(Product product);
 }

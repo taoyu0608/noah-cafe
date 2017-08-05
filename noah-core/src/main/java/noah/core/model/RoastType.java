@@ -1,5 +1,7 @@
 package noah.core.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +16,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "RoastType")
-public class RoastType {
+public class RoastType implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

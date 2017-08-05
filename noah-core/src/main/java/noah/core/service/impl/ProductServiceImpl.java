@@ -37,6 +37,12 @@ public class ProductServiceImpl implements ProductService {
 	public Product getProductById(Long id) {
 		return productDao.getOne(id);
 	}
+	
+	@Override
+	public ProductDomain getProductDomainById(Long id) {
+		Product product = this.getProductById(id);
+		return productDomainConverter.convert(product);
+	}
 
 	@Override
 	public Product saveProduct(Product product) {
