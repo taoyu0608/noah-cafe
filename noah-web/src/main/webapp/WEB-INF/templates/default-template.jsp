@@ -23,7 +23,8 @@
 	<sitemesh:write property="head" />
 </head>
 <body ng-app="noahApp">
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+<div style="position: relative;">
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
 		<a class="navbar-brand" href="#">NOAH</a>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
@@ -32,12 +33,13 @@
 		</div>
 	</nav>
 
-	<div style="margin: 5px;">
+	<div style="margin: 10px; padding-top: 60px; padding-bottom: 20px;">
 		<sitemesh:write property='body' />
 	</div>
 
     <footer class="footer">
       <div style="text-align: center;"><span>NOAH手作咖啡烘焙</span></div>
     </footer>
+</div>
 </body>
 </html>

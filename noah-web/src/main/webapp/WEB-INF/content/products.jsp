@@ -34,6 +34,19 @@
 		cursor: pointer;
 		background-color: #00CCFF !important;
 	}
+	
+	.summary-block {
+		position: fixed;
+		width: 400px;
+		top: 10px;
+		left: 35%;
+		z-index: 3000;
+	}
+	
+	.summary-block span {
+		color: white;
+		font-size: 25px;
+	}
 	</style>
 	
 	<script>
@@ -55,6 +68,9 @@
 		$scope.loadProducts();
 			
 		$scope.calculateTotal = function(packageProduct, index) {
+			if ( packageProduct.qty[index] < 0 ) {
+				packageProduct.qty[index] = 0;
+			}
 			packageProduct.total[index] = packageProduct.qty[index] * packageProduct.unitPrice;
 			$scope.calculateBuyAllTotal();
 		};
@@ -124,11 +140,10 @@
 </head>
 <body>
     <div ng-controller="productController">
+    	<div ng-show="buyAllTotal > 0" class="summary-block">
+			<span>目前購買總金額：{{ buyAllTotal | currency }}</span>
+		</div>
     	<section>
-    		<div>
-    			<h4><span>目前購買總金額：{{ buyAllTotal | currency }}</span></h4>
-			</div>
-			
 			<h4>
 				<span class="badge badge-pill badge-success">掛耳式咖啡</span>
 				<span style="float: right"><h4><span class="badge badge-success next-step" ng-click="checkout()">確定選購</span></h4></span>
@@ -159,7 +174,7 @@
 											<input 
 												ng-init="packageProduct.qty[$index] = 0" 
 												ng-model="packageProduct.qty[$index]"
-												ng-change="calculateTotal(packageProduct, $index);" 
+												ng-change="calculateTotal(packageProduct, $index)" 
 												type="number" 
 												style="width: 80px" />
 										</td>
